@@ -8,5 +8,14 @@
     "compile": "webpack ./js/index.js bundle.js --optimize-minimize"
   },
   "author": "Andrey Nering",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "babel-preset-react": "^6.3.13",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "webpack": "^1.12.9"
+  },
+  "devDependencies": {
+    "jsx-loader": "^0.13.2"
+  }
 }
