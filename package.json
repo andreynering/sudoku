@@ -13,6 +13,7 @@
     "babel-preset-react": "^6.3.13",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
+    "redux": "^3.0.5",
     "webpack": "^1.12.9"
   },
   "devDependencies": {
