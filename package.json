@@ -1,0 +1,12 @@
+{
+  "name": "sudoku",
+  "version": "0.0.0",
+  "description": "A simple sudoku game",
+  "main": "bundle.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "webpack ./js/index.js bundle.js --optimize-minimize"
+  },
+  "author": "Andrey Nering",
+  "license": "MIT"
+}
