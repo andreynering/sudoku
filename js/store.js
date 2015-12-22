@@ -3,7 +3,11 @@ var Redux = require('redux');
 var Store = Redux.createStore(function(state, action) {
   if (!state)
     state = {};
-  state.message = 'Hello, World!';
+  switch (action.type) {
+    case 'NEW_GAME':
+      state.game = action.game;
+      break;
+  }
   return state;
 });
 
