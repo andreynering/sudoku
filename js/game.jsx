@@ -5,7 +5,7 @@ class Cell extends React.Component {
   render() {
     var cell = this.props.cell;
     return (
-      <td className={'i'+cell.i+' j'+cell.j}>
+      <td className={'i'+cell.i+' j'+cell.j+' '+(cell.editable ? 'editable' : 'not-editable')}>
         <input
           value={cell.value}
           onClick={this.onClick.bind(this)}
@@ -16,12 +16,19 @@ class Cell extends React.Component {
 
   onClick(event) {
     event.preventDefault();
-    event.target.select();
+    if (this.props.cell.editable) {
+      event.target.select();
+    } else {
+      event.target.blur();
+    }
   }
 
   onChange(event) {
     event.preventDefault();
     var cell = this.props.cell;
+    if (!cell.editable) {
+      return;
+    }
     var newValue = event.target.value;
     if (newValue !== '' && !/^[1-9]$/.test(newValue)) {
       return;

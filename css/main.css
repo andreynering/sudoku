@@ -25,3 +25,7 @@
   border: 0px;
   text-align: center;
 }
+
+.not-editable input {
+  font-weight: bold;
+}
