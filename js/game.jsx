@@ -23,10 +23,15 @@ class Cell extends React.Component {
     event.preventDefault();
     var cell = this.props.cell;
     var newValue = event.target.value;
-    if (!/^[1-9]$/.test(newValue)) {
+    if (newValue !== '' && !/^[1-9]$/.test(newValue)) {
       return;
     }
-    Store.dispatch({type: 'CHANGE_VALUE', i: cell.i, j: cell.j, value: newValue});
+    Store.dispatch({
+      type: 'CHANGE_VALUE',
+      i: cell.i,
+      j: cell.j,
+      value: newValue === '' ? null : parseInt(newValue)
+    });
   }
 }
 
