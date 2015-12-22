@@ -9,13 +9,13 @@ class Game extends React.Component {
 
   render() {
     return (
-      <table>
+      <table className="sudoku-table">
         <tbody>
           {this.state.game.cells.map(function(line, i) {
             return (
               <tr key={i}>
                 {line.map(function(cell) {
-                  return <td key={cell.i+'x'+cell.j}>{cell.value}</td>;
+                  return <td className={'i'+cell.i+' j'+cell.j} key={cell.i+'x'+cell.j}>{cell.value}</td>;
                 })}
               </tr>
             );

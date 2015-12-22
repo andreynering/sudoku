@@ -1,0 +1,21 @@
+.sudoku-table {
+  border: 3px solid black;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 16pt;
+}
+
+.sudoku-table td {
+  border: 1px solid black;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+}
+
+.i2, .i5 {
+  border-bottom: 3px solid black !important;
+}
+
+.j2, .j5 {
+  border-right: 3px solid black !important;
+}
