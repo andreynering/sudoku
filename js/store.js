@@ -7,6 +7,8 @@ var Store = Redux.createStore(function(state, action) {
     case 'NEW_GAME':
       state.game = action.game;
       break;
+    case 'CHANGE_VALUE':
+      state.game.cells[action.i][action.j].value = action.value;
   }
   return state;
 });

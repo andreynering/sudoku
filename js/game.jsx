@@ -1,10 +1,46 @@
 var React = require('react');
 var Store = require('./store');
 
+class Cell extends React.Component {
+  render() {
+    var cell = this.props.cell;
+    return (
+      <td className={'i'+cell.i+' j'+cell.j}>
+        <input
+          value={cell.value}
+          onClick={this.onClick.bind(this)}
+          onChange={this.onChange.bind(this)} />
+      </td>
+    );
+  }
+
+  onClick(event) {
+    event.preventDefault();
+    event.target.select();
+  }
+
+  onChange(event) {
+    event.preventDefault();
+    var cell = this.props.cell;
+    var newValue = event.target.value;
+    if (!/^[1-9]$/.test(newValue)) {
+      return;
+    }
+    Store.dispatch({type: 'CHANGE_VALUE', i: cell.i, j: cell.j, value: newValue});
+  }
+}
+
 class Game extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {game: Store.getState().game};
+    this.state = Store.getState();
+  }
+
+  componentDidMount() {
+    var self = this;
+    Store.subscribe(function() {
+      self.setState(Store.getState());
+    });
   }
 
   render() {
@@ -15,7 +51,7 @@ class Game extends React.Component {
             return (
               <tr key={i}>
                 {line.map(function(cell) {
-                  return <td className={'i'+cell.i+' j'+cell.j} key={cell.i+'x'+cell.j}>{cell.value}</td>;
+                  return <Cell cell={cell} key={cell.j} />;
                 })}
               </tr>
             );
