@@ -29,3 +29,7 @@
 .not-editable input {
   font-weight: bold;
 }
+
+.has-conflict input {
+  color: red;
+}

@@ -9,6 +9,10 @@ var Store = Redux.createStore(function(state, action) {
       break;
     case 'CHANGE_VALUE':
       state.game.cells[action.i][action.j].value = action.value;
+      break;
+  }
+  if (state.game) {
+    state.game.checkConflicts();
   }
   return state;
 });

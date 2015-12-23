@@ -4,8 +4,15 @@ var Store = require('./store');
 class Cell extends React.Component {
   render() {
     var cell = this.props.cell;
+
+    var classes = [];
+    classes.push('i'+cell.i);
+    classes.push('j'+cell.j);
+    classes.push(cell.editable ? 'editable' : 'not-editable');
+    classes.push(cell.hasConflict ? 'has-conflict' : 'no-conflict');
+
     return (
-      <td className={'i'+cell.i+' j'+cell.j+' '+(cell.editable ? 'editable' : 'not-editable')}>
+      <td className={classes.join(' ')}>
         <input
           value={cell.value}
           onClick={this.onClick.bind(this)}
