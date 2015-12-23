@@ -69,7 +69,28 @@ class Game {
   }
 }
 
-function ArrayToGame(array) {
+function chunk(array, count) {
+  if (count == null || count < 1) return [];
+
+  var result = [];
+  var i = 0, length = array.length;
+  while (i < length) {
+    result.push(Array.prototype.slice.call(array, i, i += count));
+  }
+  return result;
+};
+
+function BoardToGame(board) {
+  var array = [];
+  for (var i = 0; i < 81; i++) {
+    if (board[i] === '0') {
+      array.push(null);
+    } else {
+      array.push(parseInt(board[i]));
+    }
+  }
+  array = chunk(array, 9);
+
   var game = []
   for (var i = 0; i < 9; i++) {
     var line = [];
@@ -84,7 +105,7 @@ function ArrayToGame(array) {
 var Sudoku = {
   Game,
   Cell,
-  ArrayToGame
+  BoardToGame
 }
 
 module.exports = Sudoku;
