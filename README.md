@@ -3,9 +3,25 @@
 A simple web sudoku game made with [ReactJS][reactjs] and [Redux][redux].
 [Play online here][play].
 
+### Building locally
+
+Prerequisites:
+
+- NodeJS
+- NPM
+- [Webpack][webpack] (installed globally)
+
+```
+$ git clone https://github.com/andreynering/sudoku.git
+$ cd sudoku
+$ npm install
+$ webpack
+```
+
 [reactjs]: https://facebook.github.io/react/
 [redux]: http://redux.js.org/
 [play]: http://andrey.nering.com.br/sudoku/
+[webpack]: https://webpack.github.io/
 
 ---
 
