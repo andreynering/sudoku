@@ -38,6 +38,7 @@ class Cell extends React.Component {
     }
     var newValue = event.target.value;
     if (newValue !== '' && !/^[1-9]$/.test(newValue)) {
+      event.target.value = cell.value;
       return;
     }
     Store.dispatch({
