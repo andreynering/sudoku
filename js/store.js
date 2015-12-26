@@ -1,8 +1,9 @@
 var Redux = require('redux');
 
 var Store = Redux.createStore(function(state, action) {
-  if (!state)
+  if (!state) {
     state = {};
+  }
   switch (action.type) {
     case 'NEW_GAME':
       state.game = action.game;
@@ -13,6 +14,7 @@ var Store = Redux.createStore(function(state, action) {
   }
   if (state.game) {
     state.game.checkConflicts();
+    localStorage.currentGame = JSON.stringify(state.game);
   }
   return state;
 });

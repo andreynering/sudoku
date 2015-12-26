@@ -5,7 +5,11 @@ var Sudoku = require('./sudoku');
 var Game = require('./game');
 var Boards = require('./boards');
 
-Store.dispatch({type: 'NEW_GAME', game: Sudoku.BoardToGame(Boards.randomBoard())});
+if (localStorage.currentGame) {
+  Store.dispatch({type: 'NEW_GAME', game: Sudoku.LocalStorageToGame(JSON.parse(localStorage.currentGame))});
+} else {
+  Store.dispatch({type: 'NEW_GAME', game: Sudoku.BoardToGame(Boards.randomBoard())});
+}
 
 var appDiv = document.getElementById('app');
 ReactDOM.render(<Game />, appDiv);

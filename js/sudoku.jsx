@@ -1,7 +1,7 @@
 class Cell {
-  constructor(i, j, value) {
+  constructor(i, j, value, editable) {
     this.value = value;
-    this.editable = !value;
+    this.editable = editable;
     this.hasConflict = false;
     this.i = i;
     this.j = j;
@@ -95,17 +95,28 @@ function BoardToGame(board) {
   for (var i = 0; i < 9; i++) {
     var line = [];
     for (var j = 0; j < 9; j++) {
-      line.push(new Sudoku.Cell(i, j, array[i][j]));
+      line.push(new Sudoku.Cell(i, j, array[i][j], array[i][j] === null));
     }
     game.push(line);
   }
   return new Game(game);
 }
 
+function LocalStorageToGame(obj) {
+  for (var i = 0; i < 9; i++) {
+    for (var j = 0; j < 9; j++) {
+      var cell = obj.cells[i][j];
+      obj.cells[i][j] = new Cell(i, j, cell.value, cell.editable);
+    }
+  }
+  return new Game(obj.cells);
+}
+
 var Sudoku = {
   Game,
   Cell,
-  BoardToGame
+  BoardToGame,
+  LocalStorageToGame
 }
 
 module.exports = Sudoku;
