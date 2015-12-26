@@ -6,6 +6,13 @@
   font-size: 16pt;
 }
 
+.controls {
+  width: 400px;
+  margin-top: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .sudoku-table td {
   border: 1px solid black;
   width: 35px;

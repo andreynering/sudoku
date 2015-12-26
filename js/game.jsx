@@ -1,5 +1,7 @@
 var React = require('react');
 var Store = require('./store');
+var Sudoku = require('./sudoku');
+var Boards = require('./boards');
 
 class Cell extends React.Component {
   render() {
@@ -62,6 +64,23 @@ function GithubCorner() {
   );
 }
 
+class Controls extends React.Component {
+  render() {
+    return (
+      <div className="controls">
+        <button onClick={this.newGameClick.bind(this)}>New Game</button>
+      </div>
+    )
+  }
+
+  newGameClick(event) {
+    event.preventDefault();
+    if (confirm('Are you sure you want to start a new game?')) {
+      Store.dispatch({type: 'NEW_GAME', game: Sudoku.BoardToGame(Boards.randomBoard())});
+    }
+  }
+}
+
 class Game extends React.Component {
   constructor(props) {
     super(props);
@@ -91,6 +110,8 @@ class Game extends React.Component {
             })}
           </tbody>
         </table>
+
+        <Controls />
 
         <GithubCorner />
       </div>
