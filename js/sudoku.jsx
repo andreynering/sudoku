@@ -9,8 +9,9 @@ class Cell {
 }
 
 class Game {
-  constructor(cells) {
+  constructor(cells, time) {
     this.cells = cells;
+    this.time = time || new Date(0, 0, 0, 0, 0, 0, 0);
   }
 
   markAllWithoutConflict() {
@@ -99,7 +100,7 @@ function BoardToGame(board) {
     }
     game.push(line);
   }
-  return new Game(game);
+  return new Game(game, null);
 }
 
 function LocalStorageToGame(obj) {
@@ -109,7 +110,7 @@ function LocalStorageToGame(obj) {
       obj.cells[i][j] = new Cell(i, j, cell.value, cell.editable);
     }
   }
-  return new Game(obj.cells);
+  return new Game(obj.cells, new Date(obj.time));
 }
 
 var Sudoku = {

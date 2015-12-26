@@ -11,5 +11,9 @@ if (localStorage.currentGame) {
   Store.dispatch({type: 'NEW_GAME', game: Sudoku.BoardToGame(Boards.randomBoard())});
 }
 
+setInterval(function() {
+  Store.dispatch({type: 'ADD_SECOND'});
+}, 1000);
+
 var appDiv = document.getElementById('app');
 ReactDOM.render(<Game />, appDiv);

@@ -65,10 +65,31 @@ function GithubCorner() {
 }
 
 class Controls extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = Store.getState();
+  }
+
+  componentDidMount() {
+    var self = this;
+    Store.subscribe(function() {
+      self.setState(Store.getState());
+    });
+  }
+
   render() {
+    var time = this.state.game.time;
+    function f(num) {
+      if (num < 10) {
+        return '0'+num;
+      } else {
+        return ''+num;
+      }
+    }
     return (
       <div className="controls">
         <button onClick={this.newGameClick.bind(this)}>New Game</button>
+        <span>{f(time.getHours())+':'+f(time.getMinutes())+':'+f(time.getSeconds())}</span>
       </div>
     )
   }

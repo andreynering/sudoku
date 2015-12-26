@@ -11,6 +11,11 @@ var Store = Redux.createStore(function(state, action) {
     case 'CHANGE_VALUE':
       state.game.cells[action.i][action.j].value = action.value;
       break;
+    case 'ADD_SECOND':
+      if (state.game) {
+        state.game.time.setSeconds(state.game.time.getSeconds() + 1);
+      }
+      break;
   }
   if (state.game) {
     state.game.checkConflicts();
