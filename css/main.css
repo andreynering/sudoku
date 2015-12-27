@@ -2,15 +2,17 @@
   border: 3px solid black;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 50px;
   font-size: 16pt;
 }
 
 .controls {
-  width: 400px;
   margin-top: 15px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.controls * {
+  margin-left: 5px;
 }
 
 .sudoku-table td {
@@ -40,6 +42,22 @@
 
 .has-conflict input {
   color: red;
+}
+
+@media (max-width: 600px) {
+  .github-corner {
+    display: none;
+  }
+}
+
+@media (min-width: 600px) {
+  .sudoku-table {
+    margin-top: 50px;
+  }
+
+  .controls {
+    width: 400px;
+  }
 }
 
 /* Github corner */

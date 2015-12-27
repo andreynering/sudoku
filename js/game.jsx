@@ -16,6 +16,7 @@ class Cell extends React.Component {
     return (
       <td className={classes.join(' ')}>
         <input
+          type="tel"
           value={cell.value}
           onClick={this.onClick.bind(this)}
           onChange={this.onChange.bind(this)} />
