@@ -3,6 +3,11 @@
 A simple web sudoku game made with [ReactJS][reactjs] and [Redux][redux].
 [Play online here][play].
 
+### Features
+
+- Mobile-friendly
+- Uses [LocalStorage][localstorage] to save the current game state
+
 ### Building locally
 
 Prerequisites:
@@ -11,7 +16,7 @@ Prerequisites:
 - NPM
 - [Webpack][webpack] (installed globally)
 
-```
+```bash
 $ git clone https://github.com/andreynering/sudoku.git
 $ cd sudoku
 $ npm install
@@ -22,6 +27,7 @@ $ webpack
 [redux]: http://redux.js.org/
 [play]: http://andrey.nering.com.br/sudoku/
 [webpack]: https://webpack.github.io/
+[localstorage]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 
 ---
 
