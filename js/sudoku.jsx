@@ -68,6 +68,19 @@ class Game {
     this.checkSubset([c[3][6], c[3][7], c[3][8], c[4][6], c[4][7], c[4][8], c[5][6], c[5][7], c[5][8]]);
     this.checkSubset([c[6][6], c[6][7], c[6][8], c[7][6], c[7][7], c[7][8], c[8][6], c[8][7], c[8][8]]);
   }
+
+  // checkConflicts must run first
+  isComplete() {
+    for (var i = 0; i < 9; i++) {
+      for (var j = 0; j < 9; j++) {
+        var cell = this.cells[i][j];
+        if (cell.hasConflict || cell.value === null) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
 }
 
 function chunk(array, count) {

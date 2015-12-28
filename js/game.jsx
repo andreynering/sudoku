@@ -93,8 +93,10 @@ class Controls extends React.Component {
     }
     return (
       <div className="controls">
-        <button onClick={this.newGameClick.bind(this)}>New Game</button>
-        <span>{f(time.getHours())+':'+f(time.getMinutes())+':'+f(time.getSeconds())}</span>
+        <p><button onClick={this.newGameClick.bind(this)}>New Game</button></p>
+        {this.state.game.isComplete()
+          ? <p className="congratulations">Congratulations!</p>
+          : <p>{f(time.getHours())+':'+f(time.getMinutes())+':'+f(time.getSeconds())}</p>}
       </div>
     )
   }
