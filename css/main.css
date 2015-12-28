@@ -60,5 +60,23 @@
   }
 }
 
+.dialog {
+  background-color: #f0f0f0;
+  width: 400px;
+  height: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dialog-close {
+  position: relative;
+  top: 2px;
+  right: 2px;
+}
+
+.dialog * {
+  margin-left: 5px;
+}
+
 /* Github corner */
 .github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}

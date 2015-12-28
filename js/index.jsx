@@ -6,14 +6,13 @@ var Game = require('./game');
 var Boards = require('./boards');
 
 if (localStorage.currentGame) {
-  Store.dispatch({type: 'NEW_GAME', game: Sudoku.LocalStorageToGame(JSON.parse(localStorage.currentGame))});
+  Store.dispatch({type: 'RESUME_GAME'});
 } else {
-  Store.dispatch({type: 'NEW_GAME', game: Sudoku.BoardToGame(Boards.randomBoard())});
+  Store.dispatch({type: 'SHOW_DIFFICULTY_DIALOG'});
 }
 
 setInterval(function() {
   Store.dispatch({type: 'ADD_SECOND'});
 }, 1000);
 
-var appDiv = document.getElementById('app');
-ReactDOM.render(<Game />, appDiv);
+ReactDOM.render(<Game />, document.getElementById('app'));

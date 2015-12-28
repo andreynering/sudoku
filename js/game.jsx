@@ -73,9 +73,13 @@ class Controls extends React.Component {
 
   componentDidMount() {
     var self = this;
-    Store.subscribe(function() {
+    self.unsubscribe = Store.subscribe(function() {
       self.setState(Store.getState());
     });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
   }
 
   render() {
@@ -97,9 +101,48 @@ class Controls extends React.Component {
 
   newGameClick(event) {
     event.preventDefault();
-    if (confirm('Are you sure you want to start a new game?')) {
-      Store.dispatch({type: 'NEW_GAME', game: Sudoku.BoardToGame(Boards.randomBoard())});
-    }
+    Store.dispatch({type: 'SHOW_DIFFICULTY_DIALOG'});
+  }
+}
+
+class DifficultyDialog extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = Store.getState();
+  }
+
+  componentDidMount() {
+    var self = this;
+    self.unsubscribe =  Store.subscribe(function() {
+      self.setState(Store.getState());
+    });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
+  render() {
+    return (
+      <div className="dialog">
+        <a onClick={this.closeClick.bind(this)} href="#close" className="dialog-close">&#x2715;</a>
+        <p>Please, choose the difficulty:</p>
+        <button data-difficulty="easy" onClick={this.difficultyClick.bind(this)}>Easy</button>
+        <button data-difficulty="medium" onClick={this.difficultyClick.bind(this)}>Medium</button>
+        <button data-difficulty="hard" onClick={this.difficultyClick.bind(this)}>Hard</button>
+      </div>
+    );
+  }
+
+  difficultyClick(event) {
+    event.preventDefault();
+    var difficulty = event.target.getAttribute('data-difficulty');
+    Store.dispatch({type: 'NEW_GAME', difficulty})
+  }
+
+  closeClick(event) {
+    event.preventDefault();
+    Store.dispatch({type: 'HIDE_DIFFICULTY_DIALOG'});
   }
 }
 
@@ -119,21 +162,25 @@ class Game extends React.Component {
   render() {
     return (
       <div>
-        <table className="sudoku-table">
-          <tbody>
-            {this.state.game.cells.map(function(line, i) {
-              return (
-                <tr key={i}>
-                  {line.map(function(cell) {
-                    return <Cell cell={cell} key={cell.j} />;
+        {this.state.dialogVisible
+          ? <DifficultyDialog />
+          : <div>
+              <table className="sudoku-table">
+                <tbody>
+                  {this.state.game.cells.map(function(line, i) {
+                    return (
+                      <tr key={i}>
+                        {line.map(function(cell) {
+                          return <Cell cell={cell} key={cell.j} />;
+                        })}
+                      </tr>
+                    );
                   })}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+                </tbody>
+              </table>
 
-        <Controls />
+              <Controls />
+            </div>}
 
         <GithubCorner />
       </div>
