@@ -5,7 +5,8 @@
   "main": "bundle.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "compile": "webpack ./js/index.js bundle.js --optimize-minimize"
+    "buildjs": "webpack",
+    "buildcss": "lessc --clean-css ./css/main.less bundle.css"
   },
   "author": "Andrey Nering",
   "license": "MIT",
