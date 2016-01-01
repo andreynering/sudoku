@@ -15,12 +15,14 @@ Prerequisites:
 - NodeJS
 - NPM
 - [Webpack][webpack] (installed globally)
+- [LESS][less] and the [clean CSS plugin][lesscleancss] (installed globally)
 
 ```bash
 $ git clone https://github.com/andreynering/sudoku.git
 $ cd sudoku
 $ npm install
-$ webpack
+$ npm run buildjs
+$ npm run buildcss
 ```
 
 [reactjs]: https://facebook.github.io/react/
@@ -28,10 +30,12 @@ $ webpack
 [play]: http://andrey.nering.com.br/sudoku/
 [webpack]: https://webpack.github.io/
 [localstorage]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+[less]: http://lesscss.org/
+[lesscleancss]: https://github.com/less/less-plugin-clean-css
 
 ---
 
-Copyright 2015 Andrey Nering
+Copyright 2015-2016 Andrey Nering
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
