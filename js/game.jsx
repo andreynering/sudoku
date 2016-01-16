@@ -94,7 +94,7 @@ class Controls extends React.Component {
     return (
       <div className="controls">
         <p><button onClick={this.newGameClick.bind(this)}>New Game</button></p>
-        {this.state.game.isComplete()
+        {Sudoku.isComplete(this.state.game.cells)
           ? <p className="congratulations">Congratulations!</p>
           : <p>{f(time.getHours())+':'+f(time.getMinutes())+':'+f(time.getSeconds())}</p>}
       </div>

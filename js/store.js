@@ -8,11 +8,11 @@ var Store = Redux.createStore(function(state, action) {
   }
   switch (action.type) {
     case 'RESUME_GAME':
-      state.game = Sudoku.LocalStorageToGame(JSON.parse(localStorage.currentGame));
+      state.game = Sudoku.localStorageToGame(JSON.parse(localStorage.currentGame));
       state.dialogVisible = false;
       break;
     case 'NEW_GAME':
-      state.game = Sudoku.BoardToGame(Boards.randomBoard(action.difficulty));
+      state.game = Sudoku.boardToGame(Boards.randomBoard(action.difficulty));
       state.dialogVisible = false;
       break;
     case 'CHANGE_VALUE':
@@ -31,7 +31,7 @@ var Store = Redux.createStore(function(state, action) {
       break;
   }
   if (state.game) {
-    state.game.checkConflicts();
+    Sudoku.checkConflicts(state.game.cells);
     localStorage.currentGame = JSON.stringify(state.game);
   }
   return state;
