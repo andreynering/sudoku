@@ -1,3 +1,5 @@
+var chunk = require('lodash.chunk');
+
 function newCell(i, j, value, editable) {
   return {
     value,
@@ -82,17 +84,6 @@ function isComplete(cells) {
   }
   return true;
 }
-
-function chunk(array, count) {
-  if (count == null || count < 1) return [];
-
-  var result = [];
-  var i = 0, length = array.length;
-  while (i < length) {
-    result.push(Array.prototype.slice.call(array, i, i += count));
-  }
-  return result;
-};
 
 function boardToGame(board) {
   var array = [];
