@@ -4,6 +4,23 @@ var Sudoku = require('./sudoku');
 var Boards = require('./boards');
 
 class Cell extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.onClick = this.onClick.bind(this);
+    this.onChange = this.onChange.bind(this);
+  }
+
+  shouldComponentUpdate(newProps, newState) {
+    var oldCell = this.props.cell;
+    var newCell = newProps.cell;
+    return (
+      oldCell.value !== newCell.value ||
+      oldCell.editable !== newCell.editable ||
+      oldCell.hasConflict !== newCell.hasConflict
+    );
+  }
+
   render() {
     var cell = this.props.cell;
 
@@ -18,8 +35,8 @@ class Cell extends React.Component {
         <input
           type="tel"
           value={cell.value}
-          onClick={this.onClick.bind(this)}
-          onChange={this.onChange.bind(this)} />
+          onClick={this.onClick}
+          onChange={this.onChange} />
       </td>
     );
   }
@@ -108,9 +125,16 @@ class Controls extends React.Component {
 }
 
 class DifficultyDialog extends React.Component {
+  shouldComponentUpdate(newProps, newState) {
+    return false;
+  }
+
   constructor(props) {
     super(props);
     this.state = Store.getState();
+
+    this.closeClick = this.closeClick.bind(this);
+    this.difficultyClick = this.difficultyClick.bind(this);
   }
 
   componentDidMount() {
@@ -127,11 +151,11 @@ class DifficultyDialog extends React.Component {
   render() {
     return (
       <div className="dialog">
-        <a onClick={this.closeClick.bind(this)} href="#close" className="dialog-close">&#x2715;</a>
+        <a onClick={this.closeClick} href="#close" className="dialog-close">&#x2715;</a>
         <p>Please, choose the difficulty:</p>
-        <button data-difficulty="easy" onClick={this.difficultyClick.bind(this)}>Easy</button>
-        <button data-difficulty="medium" onClick={this.difficultyClick.bind(this)}>Medium</button>
-        <button data-difficulty="hard" onClick={this.difficultyClick.bind(this)}>Hard</button>
+        <button data-difficulty="easy" onClick={this.difficultyClick}>Easy</button>
+        <button data-difficulty="medium" onClick={this.difficultyClick}>Medium</button>
+        <button data-difficulty="hard" onClick={this.difficultyClick}>Hard</button>
       </div>
     );
   }

@@ -1,10 +1,13 @@
 var Redux = require('redux');
 var Boards = require('./boards');
 var Sudoku = require('./sudoku');
+var cloneDeep = require('lodash.clonedeep');
 
 var Store = Redux.createStore(function(state, action) {
   if (!state) {
     state = {};
+  } else {
+    state = cloneDeep(state);
   }
   switch (action.type) {
     case 'RESUME_GAME':
