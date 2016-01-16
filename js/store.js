@@ -8,7 +8,8 @@ var Store = Redux.createStore(function(state, action) {
   }
   switch (action.type) {
     case 'RESUME_GAME':
-      state.game = Sudoku.localStorageToGame(JSON.parse(localStorage.currentGame));
+      state.game = JSON.parse(localStorage.currentGame);
+      state.game.time = new Date(state.game.time);
       state.dialogVisible = false;
       break;
     case 'NEW_GAME':

@@ -116,23 +116,12 @@ function boardToGame(board) {
   return newGame(game, null);
 }
 
-function localStorageToGame(obj) {
-  for (var i = 0; i < 9; i++) {
-    for (var j = 0; j < 9; j++) {
-      var cell = obj.cells[i][j];
-      obj.cells[i][j] = newCell(i, j, cell.value, cell.editable);
-    }
-  }
-  return newGame(obj.cells, new Date(obj.time));
-}
-
 var Sudoku = {
   newGame,
   newCell,
   checkConflicts,
   isComplete,
-  boardToGame,
-  localStorageToGame
+  boardToGame
 }
 
 module.exports = Sudoku;
