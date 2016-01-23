@@ -2,6 +2,7 @@ var React = require('react');
 var Store = require('./store');
 var Sudoku = require('./sudoku');
 var Boards = require('./boards');
+var ReactRouter = require('react-router');
 
 class Cell extends React.Component {
   constructor(props) {
@@ -110,17 +111,12 @@ class Controls extends React.Component {
     }
     return (
       <div className="controls">
-        <p><button onClick={this.newGameClick.bind(this)}>New Game</button></p>
+        <p><ReactRouter.Link to="/">Back</ReactRouter.Link></p>
         {Sudoku.isComplete(this.state.game.cells)
           ? <p className="congratulations">Congratulations!</p>
           : <p>{f(time.getHours())+':'+f(time.getMinutes())+':'+f(time.getSeconds())}</p>}
       </div>
     )
-  }
-
-  newGameClick(event) {
-    event.preventDefault();
-    Store.dispatch({type: 'SHOW_DIFFICULTY_DIALOG'});
   }
 }
 
@@ -133,7 +129,6 @@ class DifficultyDialog extends React.Component {
     super(props);
     this.state = Store.getState();
 
-    this.closeClick = this.closeClick.bind(this);
     this.difficultyClick = this.difficultyClick.bind(this);
   }
 
@@ -151,7 +146,7 @@ class DifficultyDialog extends React.Component {
   render() {
     return (
       <div className="dialog">
-        <a onClick={this.closeClick} href="#close" className="dialog-close">&#x2715;</a>
+        <ReactRouter.Link to="/" className="dialog-close">&#x2715;</ReactRouter.Link>
         <p>Please, choose the difficulty:</p>
         <button data-difficulty="easy" onClick={this.difficultyClick}>Easy</button>
         <button data-difficulty="medium" onClick={this.difficultyClick}>Medium</button>
@@ -163,12 +158,8 @@ class DifficultyDialog extends React.Component {
   difficultyClick(event) {
     event.preventDefault();
     var difficulty = event.target.getAttribute('data-difficulty');
-    Store.dispatch({type: 'NEW_GAME', difficulty})
-  }
-
-  closeClick(event) {
-    event.preventDefault();
-    Store.dispatch({type: 'HIDE_DIFFICULTY_DIALOG'});
+    Store.dispatch({type: 'NEW_GAME', difficulty});
+    location.hash = 'play';
   }
 }
 
@@ -180,38 +171,75 @@ class Game extends React.Component {
 
   componentDidMount() {
     var self = this;
-    Store.subscribe(function() {
+    this.unsubscribe = Store.subscribe(function() {
       self.setState(Store.getState());
     });
+
+    this.addSecond = setInterval(function() {
+      Store.dispatch({type: 'ADD_SECOND'});
+    }, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.addSecond);
+    this.unsubscribe();
   }
 
   render() {
+    if (typeof localStorage.currentGame === 'undefined') {
+      location.hash = '/';
+      return <div></div>;
+    }
+
     return (
       <div>
-        {this.state.dialogVisible
-          ? <DifficultyDialog />
-          : <div>
-              <table className="sudoku-table">
-                <tbody>
-                  {this.state.game.cells.map(function(line, i) {
-                    return (
-                      <tr key={i}>
-                        {line.map(function(cell) {
-                          return <Cell cell={cell} key={cell.j} />;
-                        })}
-                      </tr>
-                    );
+        <table className="sudoku-table">
+          <tbody>
+            {this.state.game.cells.map(function(line, i) {
+              return (
+                <tr key={i}>
+                  {line.map(function(cell) {
+                    return <Cell cell={cell} key={cell.j} />;
                   })}
-                </tbody>
-              </table>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
 
-              <Controls />
-            </div>}
-
-        <GithubCorner />
+        <Controls />
       </div>
     );
   }
 }
 
-module.exports = Game;
+class Index extends React.Component {
+  render() {
+    return (
+      <div className="index">
+        <h1>Sudoku</h1>
+        <p><ReactRouter.Link to="new-game">Start a new game</ReactRouter.Link></p>
+        {this.hasExistingGame()
+          ? <p>or <ReactRouter.Link to="play">resume the existing one</ReactRouter.Link></p>
+          : null}
+        <p>The code of this game is on&nbsp;
+        <a href="https://github.com/andreynering/sudoku" target="_blank">GitHub</a></p>
+      </div>
+    );
+  }
+
+  hasExistingGame() {
+    return (typeof localStorage.currentGame !== 'undefined');
+  }
+}
+
+function App(props) {
+  return (
+    <div>
+      {props.children}
+      <GithubCorner />
+    </div>
+  );
+}
+
+module.exports = {App, DifficultyDialog, Game, Index};

@@ -13,11 +13,9 @@ var Store = Redux.createStore(function(state, action) {
     case 'RESUME_GAME':
       state.game = JSON.parse(localStorage.currentGame);
       state.game.time = new Date(state.game.time);
-      state.dialogVisible = false;
       break;
     case 'NEW_GAME':
       state.game = Sudoku.boardToGame(Boards.randomBoard(action.difficulty));
-      state.dialogVisible = false;
       break;
     case 'CHANGE_VALUE':
       state.game.cells[action.i][action.j].value = action.value;
@@ -26,12 +24,6 @@ var Store = Redux.createStore(function(state, action) {
       if (state.game) {
         state.game.time.setSeconds(state.game.time.getSeconds() + 1);
       }
-      break;
-    case 'SHOW_DIFFICULTY_DIALOG':
-      state.dialogVisible = true;
-      break;
-    case 'HIDE_DIFFICULTY_DIALOG':
-      state.dialogVisible = false;
       break;
   }
   if (state.game) {
