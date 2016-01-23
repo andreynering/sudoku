@@ -8,7 +8,16 @@
     "buildjs": "webpack",
     "buildcss": "lessc --clean-css ./css/main.less bundle.css"
   },
-  "author": "Andrey Nering",
+  "author": {
+    "name": "Andrey Nering",
+    "email": "andrey@nering.com.br",
+    "url": "andrey.nering.com.br"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreynering/sudoku.git"
+  },
+  "homepage": "http://sudoku.js.org",
   "license": "MIT",
   "dependencies": {
     "babel-preset-react": "^6.3.13",
@@ -17,9 +26,7 @@
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "redux": "^3.0.5",
-    "webpack": "^1.12.9"
-  },
-  "devDependencies": {
+    "webpack": "^1.12.9",
     "jsx-loader": "^0.13.2"
   }
 }
