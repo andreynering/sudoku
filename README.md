@@ -1,5 +1,7 @@
 ## Sudoku
 
+[![Join the chat at https://gitter.im/andreynering/sudoku](https://badges.gitter.im/andreynering/sudoku.svg)](https://gitter.im/andreynering/sudoku?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 A simple web sudoku game made with [ReactJS][reactjs] and [Redux][redux].
 [Play online here][play].
 
