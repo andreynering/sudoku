@@ -2,7 +2,7 @@ var React = require('react');
 var Store = require('./store');
 var Sudoku = require('./sudoku');
 var Boards = require('./boards');
-var ReactRouter = require('react-router');
+import {Link} from 'react-router';
 
 class Cell extends React.Component {
   constructor(props) {
@@ -111,7 +111,7 @@ class Controls extends React.Component {
     }
     return (
       <div className="controls">
-        <p><ReactRouter.Link to="/">Back</ReactRouter.Link></p>
+        <p><Link to="/">Back</Link></p>
         {Sudoku.isComplete(this.state.game.cells)
           ? <p className="congratulations">Congratulations!</p>
           : <p>{f(time.getHours())+':'+f(time.getMinutes())+':'+f(time.getSeconds())}</p>}
@@ -146,7 +146,7 @@ class DifficultyDialog extends React.Component {
   render() {
     return (
       <div className="dialog">
-        <ReactRouter.Link to="/" className="dialog-close">&#x2715;</ReactRouter.Link>
+        <Link to="/" className="dialog-close">&#x2715;</Link>
         <p>Please, choose the difficulty:</p>
         <button data-difficulty="easy" onClick={this.difficultyClick}>Easy</button>
         <button data-difficulty="medium" onClick={this.difficultyClick}>Medium</button>
@@ -218,9 +218,9 @@ class Index extends React.Component {
     return (
       <div className="index">
         <h1>Sudoku</h1>
-        <p><ReactRouter.Link to="new-game">Start a new game</ReactRouter.Link></p>
+        <p><Link to="new-game">Start a new game</Link></p>
         {this.hasExistingGame()
-          ? <p>or <ReactRouter.Link to="play">resume the existing one</ReactRouter.Link></p>
+          ? <p>or <Link to="play">resume the existing one</Link></p>
           : null}
         <p>The code of this game is on&nbsp;
         <a href="https://github.com/andreynering/sudoku" target="_blank">GitHub</a></p>

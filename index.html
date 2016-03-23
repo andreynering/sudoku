@@ -1,6 +1,11 @@
 <!doctype html>
 <html lang="en-US">
   <head>
+    <script>
+      if (window.location.toString().startsWith('http://sudoku.js.org')) {
+        window.location = 'https://sudoku.js.org';
+      }
+    </script>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Sudoku - Play Online</title>
@@ -10,12 +15,6 @@
 
     <link rel="stylesheet" href="bundle.css">
     <meta name="theme-color" content="#ffffff">
-
-    <script>
-      if (window.location.toString().startsWith('http://sudoku.js.org')) {
-        window.location = 'https://sudoku.js.org';
-      }
-    </script>
 
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
