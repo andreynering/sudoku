@@ -27,7 +27,7 @@ $ npm run buildcss
 
 [reactjs]: https://facebook.github.io/react/
 [redux]: http://redux.js.org/
-[play]: http://sudoku.js.org/
+[play]: https://sudoku.js.org/
 [webpack]: https://webpack.github.io/
 [localstorage]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 [less]: http://lesscss.org/
